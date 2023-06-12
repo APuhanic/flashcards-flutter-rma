@@ -1,5 +1,5 @@
-import "package:flashcards/firebase_api.dart";
 import "package:flutter/material.dart";
+import "package:flashcards/widgets/delete_flashcard_alert_dialog.dart";
 
 class Flashcard extends StatelessWidget {
   final Map<String, dynamic> card;
@@ -18,27 +18,8 @@ class Flashcard extends StatelessWidget {
       onLongPress: () => showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Delete Deck'),
-              content:
-                  const Text('Are you sure you want to delete this flashcard?'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancel'),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    //delete deck
-                    Navigator.pop(context);
-                    await FirestoreFunctions()
-                        .deleteCard(deckName, card['cardID']);
-                    onDelete();
-                  },
-                  child: const Text('Delete'),
-                ),
-              ],
-            );
+            return DeleteFlashcardAlertDialog(
+                deckName: deckName, card: card, onDelete: onDelete);
           }),
       child: SizedBox(
         width: 600,
