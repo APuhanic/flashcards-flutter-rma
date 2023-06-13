@@ -87,4 +87,22 @@ class FirestoreFunctions {
         .doc(cardID);
     await cardReference.update({'grade': grade});
   }
+
+  Future<void> editCard(card, deckName, question, answer) async {
+    debugPrint(card['question']);
+    debugPrint(card['answer']);
+    debugPrint(deckName);
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final cardReference = db
+        .collection('users')
+        .doc(currentUser!.uid)
+        .collection('decks')
+        .doc(deckName)
+        .collection("cards")
+        .doc(card['cardID']);
+    await cardReference.update({
+      'answer': answer,
+      'question': question,
+    });
+  }
 }

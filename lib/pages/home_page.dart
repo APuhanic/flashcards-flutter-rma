@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
               'Decks',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            DeckList(decks: decks, onDelete: deleteDeck),
+            DeckList(decks: decks, onChange: deleteDeck),
           ],
         ),
       ),

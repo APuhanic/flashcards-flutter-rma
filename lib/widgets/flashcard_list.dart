@@ -6,10 +6,10 @@ class FlashcardList extends StatelessWidget {
   const FlashcardList(
       {Key? key,
       required this.cards,
-      required this.onDelete,
+      required this.onChange,
       required this.deckName})
       : super(key: key);
-  final Function onDelete;
+  final Function onChange;
   final Future<QuerySnapshot<Map<String, dynamic>>>? cards;
   final String deckName;
   @override
@@ -30,7 +30,7 @@ class FlashcardList extends StatelessWidget {
             children: cardsData
                 .map((card) => Flashcard(
                       card: card,
-                      onDelete: onDelete,
+                      onChange: onChange,
                       deckName: deckName,
                     ))
                 .toList(),

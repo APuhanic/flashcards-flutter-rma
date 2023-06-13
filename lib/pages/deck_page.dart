@@ -27,7 +27,7 @@ class _DeckPageState extends State<DeckPage> {
     });
   }
 
-  void deleteCard() async {
+  void getCards() async {
     fetchCards();
   }
 
@@ -59,21 +59,20 @@ class _DeckPageState extends State<DeckPage> {
                       fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 TextButton(
-                  onPressed: () async => await Navigator.pushNamed(
-                      context, '/study',
-                      arguments: widget.deckName),
-                  child: const Text('Study',
-                      style: TextStyle(fontSize: 30, color: Colors.blue)),
+                  onPressed: () async => {
+                    await Navigator.pushNamed(context, '/study',
+                        arguments: widget.deckName)
+                  },
+                  child: const Text('Study', style: TextStyle(fontSize: 30)),
                 ),
                 TextButton(
                   onPressed: () => showAddCardDialog(context),
-                  child: const Text('Add Card',
-                      style: TextStyle(fontSize: 18, color: Colors.blue)),
+                  child: const Text('Add Card', style: TextStyle(fontSize: 18)),
                 ),
               ],
             ),
             FlashcardList(
-                cards: cards, onDelete: deleteCard, deckName: widget.deckName),
+                cards: cards, onChange: getCards, deckName: widget.deckName),
           ],
         ),
       ),

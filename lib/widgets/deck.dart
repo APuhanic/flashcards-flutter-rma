@@ -32,14 +32,12 @@ class Deck extends StatelessWidget {
             return Card(
               elevation: 0,
               shape: const RoundedRectangleBorder(
-                side: BorderSide(
-                  color: Colors.blue,
-                ),
+                side: BorderSide(),
                 borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               child: SizedBox(
                 height: 150,
-                width: 300,
+                width: 400,
                 child: Column(
                   // Take up minimum vertical space
                   children: [
@@ -79,6 +77,7 @@ class Deck extends StatelessWidget {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 8)
                   ],
                 ),
               ),

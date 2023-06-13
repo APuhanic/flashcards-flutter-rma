@@ -59,15 +59,18 @@ class _StudyPageState extends State<StudyPage> {
                     }),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildNumberButton(1),
-                _buildNumberButton(2),
-                _buildNumberButton(3),
-                _buildNumberButton(4),
-                _buildNumberButton(5),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildNumberButton(1),
+                  _buildNumberButton(2),
+                  _buildNumberButton(3),
+                  _buildNumberButton(4),
+                  _buildNumberButton(5),
+                ],
+              ),
             ),
           ],
         ),
@@ -81,7 +84,7 @@ class _StudyPageState extends State<StudyPage> {
         style: ElevatedButton.styleFrom(
           backgroundColor: _getNumberButtonColor(grade),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0.0),
+            borderRadius: BorderRadius.circular(20.0),
           ),
         ),
         onPressed: () {
@@ -95,9 +98,12 @@ class _StudyPageState extends State<StudyPage> {
             if (currentCard >= cardsLength) currentCard = 0;
           });
         },
-        child: Text(
-          grade.toString(),
-          style: const TextStyle(fontSize: 26),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Text(
+            grade.toString(),
+            style: const TextStyle(fontSize: 26),
+          ),
         ),
       ),
     );
@@ -110,7 +116,7 @@ class _StudyPageState extends State<StudyPage> {
       case 2:
         return Colors.orange;
       case 3:
-        return Colors.yellow;
+        return const Color.fromARGB(255, 255, 193, 59);
       case 4:
         return Colors.green;
       case 5:

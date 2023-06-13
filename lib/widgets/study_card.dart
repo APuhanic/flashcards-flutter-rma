@@ -1,23 +1,37 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/material.dart";
 
-class StudyCard extends StatelessWidget {
+class StudyCard extends StatefulWidget {
   const StudyCard({
-    super.key,
+    Key? key,
     required this.cards,
     required this.currentCard,
-  });
+  }) : super(key: key);
 
   final QuerySnapshot<Map<String, dynamic>>? cards;
   final int currentCard;
 
   @override
+  State<StudyCard> createState() => _StudyCardState();
+}
+
+class _StudyCardState extends State<StudyCard> {
+  bool showAnswer = false;
+
+  @override
+  void didUpdateWidget(covariant StudyCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    showAnswer = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final card = cards?.docs[currentCard];
+    final card = widget.cards?.docs[widget.currentCard];
     Color cardColor = Colors.grey;
 
     final cardData = card?.data();
     cardColor = getCardGradeColor(cardData, cardColor);
+
     return Card(
       shape: RoundedRectangleBorder(
         side: BorderSide(
@@ -41,10 +55,27 @@ class StudyCard extends StatelessWidget {
                 height: 20,
                 thickness: 2,
               ),
-              Text(
-                cardData?['answer'],
-                style: const TextStyle(
-                  fontSize: 20,
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      showAnswer = !showAnswer;
+                    });
+                  },
+                  child: showAnswer
+                      ? Text(
+                          cardData?['answer'],
+                          style: const TextStyle(
+                            fontSize: 20,
+                          ),
+                        )
+                      : const Text(
+                          'Reveal answer',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.blue,
+                          ),
+                        ),
                 ),
               ),
             ],

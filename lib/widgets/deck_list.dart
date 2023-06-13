@@ -5,10 +5,10 @@ class DeckList extends StatelessWidget {
   const DeckList({
     super.key,
     required this.decks,
-    required this.onDelete,
+    required this.onChange,
   });
 
-  final Function onDelete;
+  final Function onChange;
   final Future<List<Map<String, dynamic>>>? decks;
 
   @override
@@ -24,7 +24,7 @@ class DeckList extends StatelessWidget {
             children: decks
                 .map((deck) => Deck(
                       deckName: deck['deckName'],
-                      onDelete: onDelete,
+                      onDelete: onChange,
                     ))
                 .toList(),
           );

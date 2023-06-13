@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flashcards/firebase_api.dart';
 
-class AddCardScreen extends StatefulWidget {
-  const AddCardScreen({Key? key, required this.deckName}) : super(key: key);
+class EditCardScreen extends StatefulWidget {
+  const EditCardScreen(
+      {Key? key,
+      required this.deckName,
+      required this.card,
+      required this.onChange})
+      : super(key: key);
   final String deckName;
+  final Function onChange;
+  final Map<String, dynamic> card;
 
   @override
-  State<AddCardScreen> createState() => _AddCardScreenState();
+  State<EditCardScreen> createState() => _EditCardScreenState();
 }
 
-class _AddCardScreenState extends State<AddCardScreen> {
+class _EditCardScreenState extends State<EditCardScreen> {
   final answerController = TextEditingController();
   final questionController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    questionController.text = widget.card["question"];
+    answerController.text = widget.card["answer"];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +37,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(
-              'New card',
+              'Edit card',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
@@ -61,17 +75,17 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     },
                     label: const Text('Cancel')),
                 FloatingActionButton.extended(
-                    heroTag: "addCard",
+                    heroTag: "edit",
                     onPressed: () async {
-                      String question = questionController.text.toString();
-                      String answer = answerController.text.toString();
-                      await FirestoreFunctions()
-                          .addCard(question, answer, widget.deckName);
+                      String question = answerController.text.toString();
+                      String answer = questionController.text.toString();
+                      await FirestoreFunctions().editCard(
+                          widget.card, widget.deckName, question, answer);
                       if (mounted) {
                         Navigator.pop(context, true);
                       }
                     },
-                    label: const Text('Add Card')),
+                    label: const Text('Edit Card')),
               ],
             )
           ],
