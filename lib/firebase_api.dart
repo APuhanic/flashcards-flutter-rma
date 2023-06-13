@@ -8,22 +8,32 @@ final auth = FirebaseAuth.instance.currentUser;
 final deckReference = db.collection('users').doc(auth!.uid).collection('decks');
 
 class FirestoreFunctions {
+  // ...
+
   Future<List<Map<String, dynamic>>> getDeck() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final deckReference =
+        db.collection('users').doc(currentUser!.uid).collection('decks');
     final querySnapshot = await deckReference.get();
     final decks = querySnapshot.docs.map((doc) => doc.data()).toList();
     return decks;
   }
 
   Future<void> addDeck(String deckName) async {
-    final newDeckReference =
-        db.collection('users').doc(auth!.uid).collection('decks').doc(deckName);
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final newDeckReference = db
+        .collection('users')
+        .doc(currentUser!.uid)
+        .collection('decks')
+        .doc(deckName);
     await newDeckReference.set({'deckName': deckName});
   }
 
   Future<QuerySnapshot<Map<String, dynamic>>> getCards(deckName) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
     final cardsReference = db
         .collection('users')
-        .doc(auth!.uid)
+        .doc(currentUser!.uid)
         .collection('decks')
         .doc(deckName)
         .collection("cards");
@@ -33,9 +43,10 @@ class FirestoreFunctions {
   }
 
   Future<void> addCard(String answer, String question, String deckName) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
     final newCardReference = db
         .collection('users')
-        .doc(auth!.uid)
+        .doc(currentUser!.uid)
         .collection('decks')
         .doc(deckName)
         .collection("cards");
@@ -43,15 +54,20 @@ class FirestoreFunctions {
   }
 
   Future<void> deleteDeck(String deckName) async {
-    final deckReference =
-        db.collection('users').doc(auth!.uid).collection('decks').doc(deckName);
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final deckReference = db
+        .collection('users')
+        .doc(currentUser!.uid)
+        .collection('decks')
+        .doc(deckName);
     await deckReference.delete();
   }
 
   Future<void> deleteCard(String deckName, cardID) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
     final cardReference = db
         .collection('users')
-        .doc(auth!.uid)
+        .doc(currentUser!.uid)
         .collection('decks')
         .doc(deckName)
         .collection("cards")
@@ -61,9 +77,10 @@ class FirestoreFunctions {
   }
 
   Future<void> changeGrade(deckName, cardID, grade) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
     final cardReference = db
         .collection('users')
-        .doc(auth!.uid)
+        .doc(currentUser!.uid)
         .collection('decks')
         .doc(deckName)
         .collection("cards")

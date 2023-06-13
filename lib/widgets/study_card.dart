@@ -40,7 +40,6 @@ class StudyCard extends StatelessWidget {
               const Divider(
                 height: 20,
                 thickness: 2,
-                indent: 20,
               ),
               Text(
                 cardData?['answer'],

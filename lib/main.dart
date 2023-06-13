@@ -5,6 +5,7 @@ import 'pages/home_page.dart';
 import 'pages/login_page.dart';
 import 'pages/deck_page.dart';
 import 'pages/study_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,7 @@ class FlashcardsApp extends StatelessWidget {
       title: 'Flashcards',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        //scaffoldBackgroundColor: Colors.blue,
+        textTheme: GoogleFonts.interTextTheme(),
       ),
       builder: (context, child) {
         return SafeArea(child: child!);

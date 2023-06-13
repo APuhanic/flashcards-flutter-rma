@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flashcards/firebase_api.dart' as api;
 import 'package:flashcards/widgets/deck_list.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Future<List<Map<String, dynamic>>>? decks;
-  var currentUser = api.auth!.email;
+  final currentUser = FirebaseAuth.instance.currentUser?.email;
 
   @override
   void initState() {
@@ -72,6 +73,12 @@ class _HomePageState extends State<HomePage> {
                     label: const Text('Add Deck'),
                   ),
                   const SizedBox(height: 10),
+                  ElevatedButton(
+                      onPressed: () => {
+                            FirebaseAuth.instance.signOut(),
+                            Navigator.pushNamed(context, '/login')
+                          },
+                      child: const Text('Sign out'))
                 ],
               ),
               DeckList(decks: decks, onDelete: deleteDeck),
