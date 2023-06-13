@@ -26,9 +26,11 @@ class FlashcardsApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flashcards',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: GoogleFonts.interTextTheme(),
-      ),
+          /*colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.blue, backgroundColor: Colors.grey),*/
+          colorSchemeSeed: const Color(0xff6750a4),
+          textTheme: GoogleFonts.interTextTheme(),
+          useMaterial3: true),
       builder: (context, child) {
         return SafeArea(child: child!);
       },

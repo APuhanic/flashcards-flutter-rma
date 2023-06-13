@@ -1,5 +1,7 @@
+import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/material.dart";
 import "package:flashcards/widgets/delete_deck_alert_dialog.dart";
+import 'package:flashcards/firebase_api.dart';
 
 class Deck extends StatelessWidget {
   final String deckName;
@@ -14,27 +16,79 @@ class Deck extends StatelessWidget {
         Navigator.pushNamed(context, '/deck', arguments: deckName);
       },
       onLongPress: () => showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return DeleteDeckAlertDialog(
-                deckName: deckName, onDelete: onDelete);
-          }),
-      child: Card(
-        elevation: 0,
-        shape: const RoundedRectangleBorder(
-          side: BorderSide(
-            color: Colors.blue,
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        child: SizedBox(
-          height: 100,
-          width: 150,
-          child: Text(
-            deckName,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
+        context: context,
+        builder: (BuildContext context) {
+          return DeleteDeckAlertDialog(
+            deckName: deckName,
+            onDelete: onDelete,
+          );
+        },
+      ),
+      child: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        future: FirestoreFunctions().getCards(deckName),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final numberOfCards = snapshot.data!.docs.length;
+            return Card(
+              elevation: 0,
+              shape: const RoundedRectangleBorder(
+                side: BorderSide(
+                  color: Colors.blue,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: SizedBox(
+                height: 150,
+                width: 300,
+                child: Column(
+                  // Take up minimum vertical space
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            deckName,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            "$numberOfCards cards",
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () async => {
+                            await Navigator.pushNamed(context, '/deck',
+                                arguments: deckName),
+                          },
+                          child: const Text("Review"),
+                        ),
+                        OutlinedButton(
+                          onPressed: () async => await Navigator.pushNamed(
+                              context, '/study',
+                              arguments: deckName),
+                          child: const Text("Study"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return const Text('Error');
+          } else {
+            return const CircularProgressIndicator();
+          }
+        },
       ),
     );
   }

@@ -51,26 +51,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Row(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
                     currentUser.toString(),
-                  ),
-                  const Text(
-                    'Decks:',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  FloatingActionButton.extended(
-                    onPressed: () {
-                      showAddDeckDialog(context);
-                    },
-                    label: const Text('Add Deck'),
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
@@ -81,10 +72,20 @@ class _HomePageState extends State<HomePage> {
                       child: const Text('Sign out'))
                 ],
               ),
-              DeckList(decks: decks, onDelete: deleteDeck),
-            ],
-          ),
+            ),
+            const Text(
+              'Decks',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            DeckList(decks: decks, onDelete: deleteDeck),
+          ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showAddDeckDialog(context);
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -25,11 +25,8 @@ class Flashcard extends StatelessWidget {
         width: 600,
         child: Card(
           elevation: 0,
-          color: Colors.blue,
           shape: const RoundedRectangleBorder(
-            side: BorderSide(
-              color: Colors.white,
-            ),
+            side: BorderSide(),
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
           child: Padding(
@@ -39,12 +36,11 @@ class Flashcard extends StatelessWidget {
               children: [
                 Text(card['question'],
                     style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    )),
                 const SizedBox(height: 10),
-                Text(card['answer'],
-                    style: const TextStyle(fontSize: 20, color: Colors.white)),
+                Text(card['answer'], style: const TextStyle(fontSize: 20)),
               ],
             ),
           ),

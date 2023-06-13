@@ -18,7 +18,9 @@ class DeckList extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final decks = snapshot.data as List<Map<String, dynamic>>;
-          return Wrap(
+          debugPrint(decks.toString());
+
+          return Column(
             children: decks
                 .map((deck) => Deck(
                       deckName: deck['deckName'],
