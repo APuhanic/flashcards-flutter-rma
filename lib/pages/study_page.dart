@@ -80,29 +80,32 @@ class _StudyPageState extends State<StudyPage> {
 
   Widget _buildNumberButton(int grade) {
     return Expanded(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: _getNumberButtonColor(grade),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
+      child: Opacity(
+        opacity: 0.9,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: _getNumberButtonColor(grade),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
           ),
-        ),
-        onPressed: () {
-          setState(() {
-            cards =
-                Future.value(FirestoreFunctions().getCards(widget.deckName));
+          onPressed: () {
+            setState(() {
+              cards =
+                  Future.value(FirestoreFunctions().getCards(widget.deckName));
 
-            final firestoreFunctions = FirestoreFunctions();
-            firestoreFunctions.changeGrade(widget.deckName, deckID, grade);
-            currentCard++;
-            if (currentCard >= cardsLength) currentCard = 0;
-          });
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Text(
-            grade.toString(),
-            style: const TextStyle(fontSize: 26, color: Colors.white),
+              final firestoreFunctions = FirestoreFunctions();
+              firestoreFunctions.changeGrade(widget.deckName, deckID, grade);
+              currentCard++;
+              if (currentCard >= cardsLength) currentCard = 0;
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text(
+              grade.toString(),
+              style: const TextStyle(fontSize: 26, color: Colors.white),
+            ),
           ),
         ),
       ),

@@ -26,6 +26,11 @@ class FlashcardList extends StatelessWidget {
                     'cardID': card.id,
                   })
               .toList();
+          if (cardsData.isEmpty) {
+            return const Center(
+                heightFactor: 20,
+                child: Text('No cards yet!', style: TextStyle(fontSize: 20)));
+          }
           return Column(
             children: cardsData
                 .map((card) => Flashcard(

@@ -39,6 +39,7 @@ class _StudyCardState extends State<StudyCard> {
         });
       },
       child: Card(
+        color: Colors.white,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: cardColor,
@@ -54,7 +55,7 @@ class _StudyCardState extends State<StudyCard> {
                 Text(
                   cardData?['question'],
                   style: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -69,12 +70,20 @@ class _StudyCardState extends State<StudyCard> {
                           fontSize: 20,
                         ),
                       )
-                    : const Text(
-                        'Reveal answer',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.blue,
-                        ),
+                    : Column(
+                        children: const [
+                          SizedBox(
+                            height: 150,
+                          ),
+                          Text(
+                            'Reveal answer',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
                       ),
               ],
             ),
