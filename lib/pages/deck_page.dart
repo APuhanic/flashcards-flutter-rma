@@ -47,29 +47,38 @@ class _DeckPageState extends State<DeckPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => showAddCardDialog(context),
+        child: const Icon(Icons.library_add_outlined),
+      ),
       body: Center(
         child: ListView(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.deckName,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                TextButton(
-                  onPressed: () async => {
-                    await Navigator.pushNamed(context, '/study',
-                        arguments: widget.deckName)
-                  },
-                  child: const Text('Study', style: TextStyle(fontSize: 30)),
-                ),
-                TextButton(
-                  onPressed: () => showAddCardDialog(context),
-                  child: const Text('Add Card', style: TextStyle(fontSize: 18)),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      widget.deckName,
+                      style: const TextStyle(
+                          fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  FilledButton(
+                    onPressed: () async => {
+                      await Navigator.pushNamed(context, '/study',
+                          arguments: widget.deckName)
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Text('Study', style: TextStyle(fontSize: 20)),
+                    ),
+                  ),
+                ],
+              ),
             ),
             FlashcardList(
                 cards: cards, onChange: getCards, deckName: widget.deckName),

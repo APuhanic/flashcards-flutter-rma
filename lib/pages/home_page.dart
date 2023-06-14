@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           showAddDeckDialog(context);
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.library_add_outlined),
       ),
     );
   }

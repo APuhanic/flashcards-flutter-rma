@@ -44,7 +44,7 @@ class _EditCardScreenState extends State<EditCardScreen> {
               height: 10,
             ),
             const Text("Question:"),
-            TextFormField(
+            TextField(
               keyboardType: TextInputType.multiline,
               maxLines: null,
               decoration: const InputDecoration(

@@ -32,53 +32,52 @@ class _StudyCardState extends State<StudyCard> {
     final cardData = card?.data();
     cardColor = getCardGradeColor(cardData, cardColor);
 
-    return Card(
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: cardColor,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          showAnswer = !showAnswer;
+        });
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: cardColor,
+            width: 3,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
         ),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-      ),
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              Text(
-                cardData?['question'],
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                Text(
+                  cardData?['question'],
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const Divider(
-                height: 20,
-                thickness: 2,
-              ),
-              Center(
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      showAnswer = !showAnswer;
-                    });
-                  },
-                  child: showAnswer
-                      ? Text(
-                          cardData?['answer'],
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        )
-                      : const Text(
-                          'Reveal answer',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.blue,
-                          ),
+                const Divider(
+                  height: 20,
+                  thickness: 2,
+                ),
+                showAnswer
+                    ? Text(
+                        cardData?['answer'],
+                        style: const TextStyle(
+                          fontSize: 20,
                         ),
-                ),
-              ),
-            ],
+                      )
+                    : const Text(
+                        'Reveal answer',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.blue,
+                        ),
+                      ),
+              ],
+            ),
           ),
         ),
       ),
@@ -91,7 +90,7 @@ class _StudyCardState extends State<StudyCard> {
     } else if (cardData?['grade'] == 2) {
       cardColor = Colors.orange;
     } else if (cardData?['grade'] == 3) {
-      cardColor = Colors.yellow;
+      cardColor = const Color.fromARGB(255, 255, 193, 59);
     } else if (cardData?['grade'] == 4) {
       cardColor = Colors.green;
     } else if (cardData?['grade'] == 5) {

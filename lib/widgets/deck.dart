@@ -30,9 +30,11 @@ class Deck extends StatelessWidget {
           if (snapshot.hasData) {
             final numberOfCards = snapshot.data!.docs.length;
             return Card(
-              elevation: 0,
+              elevation: 1,
               shape: const RoundedRectangleBorder(
-                side: BorderSide(),
+                side: BorderSide(
+                  color: Colors.transparent,
+                ),
                 borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               child: SizedBox(
@@ -70,6 +72,7 @@ class Deck extends StatelessWidget {
                           child: const Text("Review"),
                         ),
                         OutlinedButton(
+                          autofocus: true,
                           onPressed: () async => await Navigator.pushNamed(
                               context, '/study',
                               arguments: deckName),

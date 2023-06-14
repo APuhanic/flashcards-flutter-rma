@@ -26,11 +26,7 @@ class Flashcard extends StatelessWidget {
       child: SizedBox(
         width: 600,
         child: Card(
-          elevation: 0,
-          shape: const RoundedRectangleBorder(
-            side: BorderSide(),
-            borderRadius: BorderRadius.all(Radius.circular(12)),
-          ),
+          elevation: 1,
           child: Padding(
             padding: const EdgeInsets.all(14.0),
             child: Column(

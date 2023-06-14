@@ -102,7 +102,7 @@ class _StudyPageState extends State<StudyPage> {
           padding: const EdgeInsets.all(15.0),
           child: Text(
             grade.toString(),
-            style: const TextStyle(fontSize: 26),
+            style: const TextStyle(fontSize: 26, color: Colors.white),
           ),
         ),
       ),
