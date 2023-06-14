@@ -64,7 +64,9 @@ class _DeckPageState extends State<DeckPage> {
                     child: Text(
                       widget.deckName,
                       style: const TextStyle(
-                          fontSize: 30, fontWeight: FontWeight.bold),
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
                   ),
                   FilledButton(
