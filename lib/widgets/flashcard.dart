@@ -16,6 +16,10 @@ class Flashcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("aaa");
+
+    debugPrint(card['image']);
+
     return GestureDetector(
       onLongPress: () => showDialog(
           context: context,
@@ -67,6 +71,10 @@ class Flashcard extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(card['answer'], style: const TextStyle(fontSize: 20)),
+                if (card['image'] != null) ...[
+                  const SizedBox(height: 10),
+                  Image.network(card['image']),
+                ],
               ],
             ),
           ),

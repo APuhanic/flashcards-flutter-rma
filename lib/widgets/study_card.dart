@@ -1,5 +1,5 @@
-import "package:cloud_firestore/cloud_firestore.dart";
-import "package:flutter/material.dart";
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class StudyCard extends StatefulWidget {
   const StudyCard({
@@ -64,11 +64,19 @@ class _StudyCardState extends State<StudyCard> {
                   thickness: 2,
                 ),
                 showAnswer
-                    ? Text(
-                        cardData?['answer'],
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
+                    ? Column(
+                        children: [
+                          Text(
+                            cardData?['answer'],
+                            style: const TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          if (cardData?['image'] != null)
+                            Image.network(
+                              cardData?['image'] as String,
+                            ),
+                        ],
                       )
                     : Column(
                         children: const [

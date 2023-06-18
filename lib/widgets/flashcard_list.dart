@@ -23,6 +23,7 @@ class FlashcardList extends StatelessWidget {
               .map((card) => {
                     'answer': card['answer'],
                     'question': card['question'],
+                    'image': card['image'],
                     'cardID': card.id,
                   })
               .toList();
