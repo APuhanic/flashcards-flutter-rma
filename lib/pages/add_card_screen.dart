@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flashcards/firebase_api.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddCardScreen extends StatefulWidget {
   const AddCardScreen({Key? key, required this.deckName}) : super(key: key);
@@ -12,6 +15,19 @@ class AddCardScreen extends StatefulWidget {
 class _AddCardScreenState extends State<AddCardScreen> {
   final answerController = TextEditingController();
   final questionController = TextEditingController();
+  File? selectedImage; // Added variable
+
+  @override
+  void dispose() {
+    answerController.dispose();
+    questionController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

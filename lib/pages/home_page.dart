@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void deleteDeck() async {
+  void onChange() async {
     fetchDecks();
   }
 
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
               'Decks',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            DeckList(decks: decks, onChange: deleteDeck),
+            DeckList(decks: decks, onChange: onChange),
           ],
         ),
       ),
