@@ -50,7 +50,8 @@ class FirestoreFunctions {
         .collection('decks')
         .doc(deckName)
         .collection("cards");
-    await newCardReference.add({'answer': answer, 'question': question});
+    await newCardReference
+        .add({'answer': answer, 'question': question, 'image': ""});
   }
 
   Future<void> deleteDeck(String deckName) async {

@@ -71,7 +71,7 @@ class Flashcard extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(card['answer'], style: const TextStyle(fontSize: 20)),
-                if (card['image'] != null) ...[
+                if (card['image'] != null && card['image'] != "") ...[
                   const SizedBox(height: 10),
                   Image.network(card['image']),
                 ],

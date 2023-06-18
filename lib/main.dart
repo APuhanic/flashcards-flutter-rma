@@ -26,7 +26,6 @@ class FlashcardsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flashcards',
-      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       theme: ThemeData(
           colorScheme: lightColorScheme,
           textTheme: GoogleFonts.interTextTheme(),
@@ -40,7 +39,9 @@ class FlashcardsApp extends StatelessWidget {
         '/home': (context) => const HomePage(title: 'Flashcards'),
         '/deck': (context) {
           final args = ModalRoute.of(context)!.settings.arguments as String;
-          return DeckPage(deckName: args);
+          return DeckPage(
+            deckName: args,
+          );
         },
         '/study': (context) {
           final args = ModalRoute.of(context)!.settings.arguments as String;
